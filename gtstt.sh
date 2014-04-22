@@ -22,7 +22,7 @@ do
         y)  sql_date_filter="
 ;nie:contentCreated ?date .
 FILTER (?date >= '${OPTARG}-01-01T00:00:00'
-&& ?date <  '${OPTARG}-11-31T00:00:00')"
+&& ?date <  '${OPTARG}-12-31T00:00:00')"
             ;;
     esac
 done
