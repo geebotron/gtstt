@@ -8,11 +8,12 @@ sql_date_filter=
 sql_foot="
 }
 ORDER BY DESC(nie:contentCreated(?image))"
-tags_arr=
+#tags_arr=
 sql_lim=
+sql_rating=
 sql_final=
 
-while getopts t:l:y: opt
+while getopts t:l:y:r: opt
 do
     case $opt in
         t)  tags_arr=(${OPTARG//,/ })
@@ -23,6 +24,10 @@ do
 ;nie:contentCreated ?date .
 FILTER (?date >= '${OPTARG}-01-01T00:00:00'
 && ?date <  '${OPTARG}-12-31T00:00:00')"
+            ;;
+        r)  sql_rating="
+;nao:numericRating ?rt .
+FILTER (?rt >= '${OPTARG}')"
             ;;
     esac
 done
@@ -37,6 +42,7 @@ done
 sql_final="${sql_head}\
     ${sql_tags}\
     ${sql_date_filter}\
+    ${sql_rating}\
     ${sql_foot}\
     ${sql_lim}"
 
